@@ -13,10 +13,11 @@ class DepthTimeEmbedding(nn.Module):
         self.base = base
 
         # Precompute the frequency denominators for speed
-        self.inv_freq = torch.exp(-math.log(base) * torch.arange(0,d_model,2).float() / d_model )
+        inv_freq = torch.exp(-math.log(base) * torch.arange(0,d_model,2).float() / d_model )
 
+        #register_buffer("inv_freq",self.inv_freq,False)
         #shape [d_model/2]
-        self.register_buffer("inv_freq",self.inv_freq,False)
+        self.register_buffer("inv_freq",inv_freq,False)
 
     def forward(self,x: torch.Tensor , t: int) :
         """
@@ -40,4 +41,4 @@ class DepthTimeEmbedding(nn.Module):
         #broadcast to [bsz,seqlen, d_model]
         return x + depth_vec.view(1,1,d).expand(bsz,seqlen,d)
 
-    
+

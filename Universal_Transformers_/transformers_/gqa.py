@@ -41,7 +41,7 @@ class GroupedQueryAttention(nn.Module):
         if value is None:
             value = key
 
-        batch_size , seq_len = query.shape
+        batch_size, seq_len, dim = query.shape  # Fixed: unpack three dimensions
         kv_seq_length = key.shape[1]
 
         #project queries , keys, values
