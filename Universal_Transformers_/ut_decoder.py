@@ -1,9 +1,9 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from transformers_.gqa import GroupedQueryAttention
+from .transformers_.gqa import GroupedQueryAttention
 from .transition_mlp import FeedForwardTransition
-from transformers_.rms_norm import RMSNorm
+from .transformers_.rms_norm import RMSNorm
 from typing import Optional, Tuple, Dict
 from .depth_time_emdedding import DepthTimeEmbedding
 from .ut_decoder_bloc import UniversalTransformersDecoderBlock
