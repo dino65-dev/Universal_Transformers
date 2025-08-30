@@ -2,8 +2,8 @@
 import torch.nn as nn
 import math
 import torch
-from ut_block import UniversalTransformerBlock
-from transformers_.rms_norm import RMSNorm
+from .ut_block import UniversalTransformerBlock
+from .transformers_.rms_norm import RMSNorm
 class UniversalTransformer(nn.Module):
     def __init__(self, vocab_size: int, dim: int = 512, max_seq_len: int = 1024, num_heads: int = 8, num_kv_heads: int = 4, T: int = 6, dropout: float = 0.1):
         super().__init__()

@@ -1,9 +1,9 @@
 # Universal Transformers Block
 import torch.nn as nn
 import torch
-from transition_mlp import FeedForwardTransition
-from transformers_.rms_norm import RMSNorm
-from transformers_.gqa import GroupedQueryAttention
+from .transition_mlp import FeedForwardTransition
+from .transformers_.rms_norm import RMSNorm
+from .transformers_.gqa import GroupedQueryAttention
 
 class UniversalTransformerBlock(nn.Module):
     def __init__(self, dim: int, num_heads: int = 8, num_kv_heads: int = 4, dropout: float = 0.1):

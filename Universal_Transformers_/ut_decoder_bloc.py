@@ -1,9 +1,9 @@
 # This is decoder-only UT clock
 import torch
 import torch.nn as nn
-from transformers_.gqa import GroupedQueryAttention
+from .transformers_.gqa import GroupedQueryAttention
 from .transition_mlp import FeedForwardTransition
-from transformers_.rms_norm import RMSNorm
+from .transformers_.rms_norm import RMSNorm
 from typing import Optional, Tuple, Dict
 class UniversalTransformersDecoderBlock(nn.Module):
     """One shared decoder block used recurrently across depth.
