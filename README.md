@@ -34,6 +34,7 @@ Universal_Transformers/
 ├── transition_mlp.py              # Feed-forward transition layer
 ├── depth_time_emdedding.py        # Depth/time position embeddings
 ├── pos_emb.py                     # Sinusoidal positional embeddings
+├── train_ut_decoder.py            # Training script for the model
 └── transformers/                  # Standard transformer components
     ├── gqa.py                     # Grouped Query Attention
     ├── rms_norm.py                # RMS normalization
@@ -48,36 +49,64 @@ git clone https://github.com/your-username/Universal_Transformers.git
 cd Universal_Transformers
 
 # Install dependencies
-pip install torch numpy
+pip install torch numpy tqdm
 ```
 
 ## Quick Start
 
 ```python
 import torch
-from Universal_Transformers import UniversalDecoder
+from Universal_Transformers.ut_decoder import UniversalTransformerDecoder
 
 # Model configuration
 config = {
     'vocab_size': 30000,
-    'd_model': 512,
+    'dim': 512,
+    'max_seq_len': 1024,
     'num_heads': 8,
     'num_kv_heads': 2,  # For GQA
-    'd_ff': 2048,
-    'max_seq_len': 1024,
-    'depth': 6,  # Number of recurrent steps
+    'T': 6,  # Number of recurrent steps
     'dropout': 0.1
 }
 
 # Initialize model
-model = UniversalDecoder(**config)
+model = UniversalTransformerDecoder(**config)
+
+# Forward pass
+input_ids = torch.randint(0, config['vocab_size'], (1, 50))
+output = model(input_ids)
+
+# Generate text
+generated = model.generate(
+    input_ids=input_ids,
+    max_new_tokens=100,
+    temperature=0.8,
+    top_k=50,
+    top_p=0.9
+)
 ```
+
+## Training
+
+To train the model, use the provided training script:
+
+```bash
+python train_ut_decoder.py
+```
+
+The script includes configurations for model parameters, training hyperparameters, and datasets. You can modify the `model_config` and `train_config` dictionaries in the `main()` function to customize:
+
+- **Model Config**: Adjust `vocab_size`, `dim`, `num_heads`, `T` (recurrent steps), etc.
+- **Training Config**: Set `batch_size`, `learning_rate`, `num_epochs`, `warmup_steps`, etc.
+
+The trainer supports logging, checkpoints, validation, and gradient clipping. It uses dummy datasets by default for testing; replace with real data for production training.
 
 ## Requirements
 
 - Python 3.7+
 - PyTorch 1.9+
 - NumPy
+- tqdm (for progress bars)
 
 ## License
 
