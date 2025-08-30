@@ -34,7 +34,7 @@ Universal_Transformers/
 ├── transition_mlp.py              # Feed-forward transition layer
 ├── depth_time_emdedding.py        # Depth/time position embeddings
 ├── pos_emb.py                     # Sinusoidal positional embeddings
-└── transformers/                  # Standard transformer components
+└── transformers_/                 # Standard transformer components
     ├── gqa.py                     # Grouped Query Attention
     ├── rms_norm.py                # RMS normalization
     └── ...                        # Other transformer utilities
