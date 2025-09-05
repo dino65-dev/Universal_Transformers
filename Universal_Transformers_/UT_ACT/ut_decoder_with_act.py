@@ -1,6 +1,8 @@
 # ut_decoder_with_act.py
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
+import math
 from typing import Optional, Tuple, Dict
 from ut_decoder_bloc import UniversalTransformersDecoderBlock  # Your existing UT block
 from act_module import AdaptiveComputationTime
